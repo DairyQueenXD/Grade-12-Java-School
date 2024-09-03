@@ -4,8 +4,6 @@ import java.util.*;
 
 public class Ex10 {
 	
-	
-	
 	public static boolean commonLetters(String str1, String str2,int[]chara1,int[]chara2) {
 		for (int i = 0; i < str1.length(); ++i) {
 			chara1[str1.charAt(i)]++;
