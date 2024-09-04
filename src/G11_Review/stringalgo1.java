@@ -12,7 +12,10 @@ public class stringalgo1 {
         String w = in.nextLine().trim().toLowerCase();
         System.out.print("Enter a word to replace the deleted word with: ");
         String replace = in.nextLine().trim().toLowerCase();
-        
+        in.close();
+        if (w.equals("")) {
+        	System.out.println(s); return;
+        }
         int start = 0, delete = s.indexOf(w);
         while (delete != -1) {
         	s = s.substring(0,delete)+replace+s.substring(delete+w.length());
@@ -20,9 +23,7 @@ public class stringalgo1 {
         	delete = s.indexOf(w,start);
         }
 
-        // Output the updated sentence
         System.out.println(s);
-
-		in.close();
 	}
+	
 }
