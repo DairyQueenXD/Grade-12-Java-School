@@ -4,8 +4,10 @@ import java.io.*;
 public class test {
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	static StringTokenizer st;
-	public static void main(String[] args) {
-//		Scanner inFile = new Scanner (new )
+
+	
+	public static void main(String[] args) throws IOException {
+
 
 	}
 
