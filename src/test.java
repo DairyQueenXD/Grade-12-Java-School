@@ -5,10 +5,10 @@ public class test {
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	static StringTokenizer st;
 
-	
-	public static void main(String[] args) throws IOException {
 
-
+	public static void main(String[] args) throws NumberFormatException{
+		StringBuilder sb = new StringBuilder("ab");
+		System.out.println(sb.capacity());
 	}
 
 	static String next () throws IOException {
