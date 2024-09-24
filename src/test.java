@@ -9,6 +9,10 @@ public class test {
 	public static void main(String[] args) throws NumberFormatException{
 		StringBuilder sb = new StringBuilder("ab");
 		System.out.println(sb.capacity());
+		Scanner in = new Scanner (System.in);
+		String str = in.nextLine();
+		int x  = Integer.parseInt(str);
+		System.out.println(x);
 	}
 
 	static String next () throws IOException {

@@ -9,6 +9,7 @@ public class StringTokenizerExercise2 {
 		
 		// Note: For multiply please input "x" and not "*" !!
 		Scanner in = new Scanner (System.in);
+		
 		String s = in.nextLine();
 		StringTokenizer st = new StringTokenizer(s,"+-x/%", true);
 		
