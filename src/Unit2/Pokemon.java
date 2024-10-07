@@ -52,4 +52,12 @@ public class Pokemon {
 	public String toString() {
 		return (name + " - " + hp + " - " + height + " - " + company);
 	}
+	
+	// equals method
+	public boolean equals(Object o) {
+		Pokemon p = (Pokemon) o;
+		if (this.name.equals(p.name) && this.hp == p.hp) return true; 
+		// Note that here, we are NOT doing recursion! this.name is a STRING, so it's a "different" equals.
+		return false;
+	}
 }
