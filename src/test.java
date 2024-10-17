@@ -1,5 +1,9 @@
 
-import java.util.*; import java.math.*;
+import java.util.*;
+
+import Unit2.Movie;
+
+import java.math.*;
 import java.io.*;
 public class test {
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -7,15 +11,26 @@ public class test {
 
 	public static void main(String[] args) throws NumberFormatException{
 
-		Scanner in = new Scanner (System.in);
-
-		BigInteger b1 = new BigInteger("99999999999999");
-		BigInteger b3 = new BigInteger ("999"); 
-		System.out.println(b1.min(b3));
-		BigInteger b2 = BigInteger.valueOf(2);
-		if (b1.compareTo(b2) >= 0) System.out.println("sdfkdsjfldsk");
-		in.close();
-		fun2("brawl"); fun3(4321);
+		int arr[] = new int[300];
+		int nums[] = {2,3,4,5,6,7,8};
+		int counts[] = new int[7];
+		for (int i = 0; i < 300; ++i) {
+			int x = (int) (Math.random()*4) + 1, y = (int) (Math.random()*4)+1;
+			arr[i] = x + y;
+			for (int j = 0;j < 7; ++j ) {
+				if (nums[j] == arr[i]) { counts[j]++; break;}
+			}
+		}
+		
+		ArrayList<Integer> old = new ArrayList<>();
+		old.add(5); old.add(7);
+		ArrayList<Integer> newArr = new ArrayList<Integer>(old);
+		newArr.get(1) = 8;
+	
+//		System.out.println(Double.parseDouble(num));
+//		for (int i = 0; i < 7; ++i) System.out.println(counts[i]);
+		// for (Movie mov: moviesSortedByGenre) System.out.println(mov);
+		
 	}
 	public static void fun3 (int k) {
 		System.out.println (k);

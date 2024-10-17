@@ -1,6 +1,6 @@
 package Unit2;
 
-public class Pokemon {
+public class Pokemon implements Comparable <Pokemon> {
 
 	// Instance Variables
 	private String name;
@@ -33,6 +33,10 @@ public class Pokemon {
 		return this.hp;
 	}
 	
+	public static String getCompany () {
+		return Pokemon.company;
+	}
+	
 	// Setter Method
 	public void setHp(double newValue) {
 		this.hp = newValue;
@@ -59,5 +63,28 @@ public class Pokemon {
 		if (this.name.equals(p.name) && this.hp == p.hp) return true; 
 		// Note that here, we are NOT doing recursion! this.name is a STRING, so it's a "different" equals.
 		return false;
+	}
+	
+	// compareTo method
+	public int compareTo(Pokemon p) { 
+		// coming from an interface, that we already specified the type ("<Pokemon>").
+		// therefore, we do not need to cast an Object and can directly use Pokemon as parameter
+
+		// Compare by hp
+//		if (this.hp < p.hp) return -1;
+//		if (this.hp > p.hp) return 1;
+//		return 0;
+		
+		// Compare by name
+//		return this.name.compareTo(p.name);
+		
+		// Compare by name (descending order)
+		return (this.name.compareTo(p.name))*-1;
+		// or we can do 
+		// return p.name.compareTo(this.name);
+		
+		// Compare by height
+//		return this.height - p.height; // the number doesn't matter, only the sign matter!
+		
 	}
 }

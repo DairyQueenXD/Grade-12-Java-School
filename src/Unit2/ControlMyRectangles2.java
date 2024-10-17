@@ -7,6 +7,7 @@ public class ControlMyRectangles2 {
 		Scanner in = new Scanner (System.in);
 		System.out.print("Enter the # of squares to generate: ");
 
+		
 	}
 
 }

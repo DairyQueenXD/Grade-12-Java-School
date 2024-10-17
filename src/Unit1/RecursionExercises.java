@@ -52,7 +52,7 @@ public class RecursionExercises {
 				int reformat = Integer.parseInt(in.nextLine());
 				System.out.println("Your reformated integer is " + commas(reformat) + ".");
 			} else if (num == 7) {
-				String[] arr = {"A", "-1", "-2", "-3"}; // Please change array here!
+				String[] arr = {}; // Please change array here!
 				System.out.println("The average of all numbers is " + Math.round(calculateAverage(arr,0,0,0) * 100) / 100.0 + ".");
 			}
 			System.out.println();
