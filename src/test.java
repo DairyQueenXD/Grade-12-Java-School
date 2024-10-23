@@ -25,7 +25,8 @@ public class test {
 		ArrayList<Integer> old = new ArrayList<>();
 		old.add(5); old.add(7);
 		ArrayList<Integer> newArr = new ArrayList<Integer>(old);
-		newArr.get(1) = 8;
+		newArr.get(0);
+//		newArr.get(1) = 8;
 	
 //		System.out.println(Double.parseDouble(num));
 //		for (int i = 0; i < 7; ++i) System.out.println(counts[i]);
