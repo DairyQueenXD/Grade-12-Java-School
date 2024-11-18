@@ -10,7 +10,7 @@ public class Driver {
 
 		ArrayList <Pokemon> list = new ArrayList <>();
 		
-		int[] arr = new int[5];
+//		int[] arr = new int[5];
 		ArrayList <Double> list2 = new ArrayList <>();
 		list2.add( 5*1.0);
 		System.out.println(list2.get(0));
