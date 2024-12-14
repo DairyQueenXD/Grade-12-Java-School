@@ -1,5 +1,7 @@
 package Unit2_Assignment4;
-import java.util.*; import java.io.*;
+import java.util.*;
+import java.util.List;
+import java.io.*;
 import javax.swing.*;
 
 import java.awt.*;
@@ -69,12 +71,20 @@ public class DriverWithJFrame implements ActionListener {
 		JMenuItem option2 = new JMenuItem("Sort by artist");
 		JMenuItem option3 = new JMenuItem("Sort by time");
 		JMenuItem option4 = new JMenuItem("Add a song");
+		JMenuItem option5 = new JMenuItem("Remove by number");
+		JMenuItem option6 = new JMenuItem("Remove by title");
+		JMenuItem option7 = new JMenuItem("Remove first song");
+		JMenuItem option8 = new JMenuItem("Remove a range of songs");
 
 		// Add options to the popup menu
 		popupMenu.add(option1);
 		popupMenu.add(option2);
 		popupMenu.add(option3);
 		popupMenu.add(option4);
+		popupMenu.add(option5);
+		popupMenu.add(option6);
+		popupMenu.add(option7);
+		popupMenu.add(option8);
 
 		// Add action listener to the three-dot button to show the popup menu
 		threeDotButton.addActionListener(e -> {
@@ -82,6 +92,155 @@ public class DriverWithJFrame implements ActionListener {
 		});
 
 		buttonPanel.add(threeDotButton);
+
+		option5.addActionListener(e -> { // Remove by song number
+		    if (currentPlaylist != null) {
+		        if (currentPlaylist.getSongs().isEmpty()) {
+		            JOptionPane.showMessageDialog(frame, "The playlist is empty. No song to remove.", "Error", JOptionPane.ERROR_MESSAGE);
+		            return;
+		        }
+
+		        try {
+		            // ask user for the song number
+		            String input = JOptionPane.showInputDialog(frame, "Enter the song number to remove:", "Remove by Number", JOptionPane.QUESTION_MESSAGE);
+
+		            if (input == null || input.trim().isEmpty()) {
+		                JOptionPane.showMessageDialog(frame, "Invalid input. Please enter a valid song number.", "Error", JOptionPane.ERROR_MESSAGE);
+		                return;
+		            }
+
+		            int songNumber = Integer.parseInt(input.trim());
+
+		            // invalid song number
+		            if (songNumber < 1 || songNumber > currentPlaylist.getSongs().size()) {
+		                JOptionPane.showMessageDialog(frame, "Invalid song number. Must be between 1 and " + currentPlaylist.getSongs().size() + ".", "Error", JOptionPane.ERROR_MESSAGE);
+		                return;
+		            }
+
+		            // Remove the song by index (adjust for 0-based indexing)
+		            Song removedSong = currentPlaylist.getSongs().remove(songNumber - 1);
+
+		            // Update playlist info
+		            currentPlaylist.setNumOfSongs(currentPlaylist.getSongs().size());
+		            currentPlaylist.substractTotalTime(removedSong.getTime());
+		            currentPlaylist.calcAverageTime();
+
+		            // Update visuals
+		            numOfSongs.setText(currentPlaylist.getNumOfSongs()+"");
+		            totalTime.setText(currentPlaylist.getTotalTime()+"");
+		            averageTimePerSong.setText(currentPlaylist.getAverageTime()+"");
+		            displaySongs(currentPlaylist);
+
+		            // Show success message
+		            JOptionPane.showMessageDialog(frame, "Removed song #" + songNumber + ": " + removedSong.getTitle(), "Success", JOptionPane.INFORMATION_MESSAGE);
+		        } catch (NumberFormatException ex) {
+		            JOptionPane.showMessageDialog(frame, "Invalid input. Please enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
+		        }
+		    } else {
+		        JOptionPane.showMessageDialog(frame, "No playlist selected.", "Error", JOptionPane.ERROR_MESSAGE);
+		    }
+		});
+
+
+		option6.addActionListener(e -> { // remove by title
+			if (currentPlaylist != null) {
+		        if (currentPlaylist.getSongs().isEmpty()) {
+		            JOptionPane.showMessageDialog(frame, "The playlist is empty. No song to remove.", "Error", JOptionPane.ERROR_MESSAGE);
+		            return;
+		        }
+
+		        // Ask the user for the title to remove
+		        String titleToRemove = JOptionPane.showInputDialog(frame, "Enter the title of the songs to remove:", "Remove by Title", JOptionPane.QUESTION_MESSAGE);
+
+		        // invalid input 
+		        if (titleToRemove == null || titleToRemove.trim().isEmpty()) {
+		            JOptionPane.showMessageDialog(frame, "Invalid input. Please enter a valid title.", "Error", JOptionPane.ERROR_MESSAGE);
+		            return;
+		        }
+
+		        titleToRemove = titleToRemove.trim();
+		        List<Song> songs = currentPlaylist.getSongs();
+
+		        // Sort the playlist by title (if not already sorted)
+		        Collections.sort(songs); 
+
+		        // find  occurrence of the title
+		        int index = Collections.binarySearch(songs, new Song(titleToRemove, null, null, 0, null));
+
+		        if (index < 0) {
+		            JOptionPane.showMessageDialog(frame, "No songs found with the title \"" + titleToRemove + "\".", "Error", JOptionPane.ERROR_MESSAGE);
+		            return;
+		        }
+
+		        // Remove all occurrences by iterating forward and backward
+		        int start = index, end = index;
+
+		        // Look behind for duplicates
+		        while (start > 0 && songs.get(start - 1).getTitle().equalsIgnoreCase(titleToRemove)) {
+		            start--;
+		        }
+
+		        // Look forward for duplicates
+		        while (end < songs.size() - 1 && songs.get(end + 1).getTitle().equalsIgnoreCase(titleToRemove)) {
+		            end++;
+		        }
+
+		        // Remove all occurrences
+		        List<Song> removedSongs = new ArrayList<>(songs.subList(start, end + 1));
+		        songs.subList(start, end + 1).clear();
+
+		        // Update playlist statistics
+		        for (Song removedSong : removedSongs) {
+		            currentPlaylist.substractTotalTime(removedSong.getTime());
+		        }
+		        currentPlaylist.setNumOfSongs(songs.size());
+		        currentPlaylist.calcAverageTime();
+
+		        // Update visual displays
+		        numOfSongs.setText(currentPlaylist.getNumOfSongs()+"");
+		        totalTime.setText(currentPlaylist.getTotalTime()+"");
+		        averageTimePerSong.setText(currentPlaylist.getAverageTime()+"");
+		        displaySongs(currentPlaylist);
+
+		        // Show success message
+		        JOptionPane.showMessageDialog(frame, "Removed all songs with the title \"" + titleToRemove + "\". Total removed: " + removedSongs.size(), "Success", JOptionPane.INFORMATION_MESSAGE);
+		    } else { // error
+		        JOptionPane.showMessageDialog(frame, "No playlist selected.", "Error", JOptionPane.ERROR_MESSAGE);
+		    }
+		});
+
+		option7.addActionListener(e -> { // remove first song
+			if (currentPlaylist != null) {
+		        if (currentPlaylist.getSongs().isEmpty()) {
+		            JOptionPane.showMessageDialog(frame, "The playlist is empty. No song to remove.", "Error", JOptionPane.ERROR_MESSAGE);
+		        } else {
+		            // Remove the first song
+		            Song firstSong = currentPlaylist.getSongs().remove(0);
+
+		            // Update the playlist
+		            currentPlaylist.setNumOfSongs(currentPlaylist.getNumOfSongs() - 1);
+		            numOfSongs.setText(currentPlaylist.getNumOfSongs()+"");
+		            
+		            currentPlaylist.substractTotalTime(firstSong.getTime());
+		            totalTime.setText(currentPlaylist.getTotalTime()+"");
+		            
+		            currentPlaylist.calcAverageTime();
+		            averageTimePerSong.setText(currentPlaylist.getAverageTime()+"");
+
+		            // Re-display the updated song list
+		            displaySongs(currentPlaylist);
+
+		            JOptionPane.showMessageDialog(frame, "Removed the first song: " + firstSong.getTitle(), "Success", JOptionPane.INFORMATION_MESSAGE);
+		        }
+		    } else {
+		        JOptionPane.showMessageDialog(frame, "No playlist selected.", "Error", JOptionPane.ERROR_MESSAGE);
+		    }
+		});
+
+		option8.addActionListener(e -> { // remove a range of songs
+
+		});
+
 		option1.addActionListener(e -> { // Sort the songs by title
 			if (currentPlaylist != null) { // check if playlist is selected
 				Collections.sort(currentPlaylist.getSongs());
@@ -583,14 +742,14 @@ public class DriverWithJFrame implements ActionListener {
 	public void displaySongs(Playlist playlist) {
 		// Clear the existing content
 		allSongsPanel.removeAll();
-		
+
 		// Iterate through the songs in the playlist
 		for (int i = 0; i < playlist.getSongs().size(); ++i) {
 			Song song = playlist.getSongs().get(i);
 
 			// Create a panel for each song
 			JPanel songPanel = new JPanel(new FlowLayout());
-			songPanel.setMaximumSize(new Dimension(1000, 50)); // Adjust as needed
+			songPanel.setMaximumSize(new Dimension(1000, 50)); 
 
 			// Create buttonPanel to hold the threeDotButton
 			JPanel buttonPanel = new JPanel (new FlowLayout());
@@ -699,7 +858,7 @@ public class DriverWithJFrame implements ActionListener {
 	 * Return: 
 	 * - JPanel: The button panel containing the playlist button and three-dot button
 	 */
-	
+
 	public JPanel createButtonPanel(Playlist playlist, String title) {
 		// Create the button panel
 		JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 10));

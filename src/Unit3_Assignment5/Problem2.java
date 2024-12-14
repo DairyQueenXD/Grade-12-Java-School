@@ -2,27 +2,33 @@ package Unit3_Assignment5;
 
 import java.util.*;
 
-public class Problem2 {
+// Name: Dequan Kong
+// Date: December 6, 2024
+// Description: A program that finds the number of all reduced fractions between 0 and 1 (inclusive) with denominators <= N.
+// The user can input a lower and upper limit, and the program will output the total number of fractions and the number of fractions within the range.
 
-	public static void invalid() {
-		System.out.println("Invalid input. Please try again.");
-	}
+public class Problem2 {
 
 	public static void main(String[] args) {
 		Scanner in = new Scanner (System.in);
 		int n = -1;
+		
+		// Read N from console
 		while (!(n >= 1 && n <= 1000)) {
 			try { 
 				System.out.print("Enter the maximum denominator: ");
 				n = Integer.parseInt(in.nextLine());
 				if (!(n >= 1 && n <= 1000)) throw new NumberFormatException();
 			} catch (NumberFormatException e) {
-				invalid();
+				System.out.println("Invalid input. Please try again.");
 			}
 		}
 
+		// This TreeSet uses the compareTo method in the Fraction class
 		TreeSet<Fraction> allFractions = new TreeSet<Fraction>();
 
+		// Add all fractions to TreeSet
+		// The compareTo method in the Fraction class will detect fractions that are not reduced
 		for (int denom = 1; denom <= n; ++denom) {
 			for (int num = 0; num <= denom; ++num) {
 				allFractions.add(new Fraction(num, denom));
@@ -33,7 +39,7 @@ public class Problem2 {
 		boolean check = true;
 
 		Fraction lower = null, upper = null;
-		// input lower limit
+		// Read lower limit from console
 		while (check) {
 			try {
 				System.out.print("Enter the lower limit: ");
@@ -49,12 +55,12 @@ public class Problem2 {
 				if ((num < 0 && denom > 0) || (num > 0 && denom < 0 ) || denom == 0 || Math.abs(num) > Math.abs(denom)) throw new NumberFormatException();
 				check = false;
 			} catch (NumberFormatException e) {
-				invalid();
+				System.out.println("Invalid input. Please try again.");
 				check = true;
 			}
 		}
 
-		// input upper limit
+		// Read upper limit from console
 		check = true;
 		while (check) {
 			try {
@@ -72,16 +78,18 @@ public class Problem2 {
 						upper.compareTo(lower) < 0) throw new NumberFormatException();
 				check = false;
 			} catch (NumberFormatException e) {
-				invalid();
+				System.out.println("Invalid input. Please try again.");
 				check = true;
 			}
 		}
 
+		// Output the total # of fractions
 		System.out.println("Total number of fractions: " + allFractions.size());
+		
+		// Use a subset to determine the # of fractions between lower and upper limit
 		System.out.println("Number of Fractions between " + lower + " and " + upper + " inclusive: " + 
 				allFractions.subSet(lower, true,upper,true).size());
 
 		in.close();
-
 	}
 }

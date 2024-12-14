@@ -12,32 +12,33 @@ public class ArrayListDemo
 		myList.add ("apple");
 		myList.add ("peach");
 		myList.add ("banana");
-		System.out.println (myList);
+		System.out.println (myList); // [apple,peach,banana]
 
 		myList.add (1, "lemon");
-		System.out.println (myList);
+		System.out.println (myList); // [apple,lemon,peach,banana]
 
-		System.out.println (myList.size ());
+		System.out.println (myList.size ()); // 4
 
 		String fruit = myList.get (2);
-		System.out.println (fruit);
+		System.out.println (fruit); // peach
 
 		String removedFruit = myList.set (2, "apple");
-		System.out.println (removedFruit);
-		System.out.println (myList);
+		System.out.println (removedFruit); // peach (returns the replaced element)
+		System.out.println (myList); // [apple, lemon, apple, banana]
 
-		int index = myList.indexOf ("apple");
-		System.out.println (index);
-		index = myList.lastIndexOf ("apple");
-		System.out.println (index);
+		int index = myList.indexOf ("apple"); 
+		System.out.println (index);// 0
+		index = myList.lastIndexOf ("apple"); 
+		System.out.println (index);// 2
 
-		System.out.println (myList.contains ("lemon"));
-		System.out.println (myList.contains ("peach"));
+		System.out.println (myList.contains ("lemon")); // true
+		System.out.println (myList.contains ("peach")); // false
 
-		removedFruit = myList.remove (2);
-		System.out.println (removedFruit);
-		//	myList.add (new Integer (1)); <- error
-		System.out.println (myList);
+		removedFruit = myList.remove (2); // returns the removed element
+		System.out.println (removedFruit); // apple
+		
+//			myList.add (new Integer (1)); // <- error
+		System.out.println (myList); // [apple, lemon, banana]
 
 		ArrayList <Integer>newList = new ArrayList <Integer>();
 		for (int number = 1 ; number <= 10 ; number++)
@@ -58,7 +59,7 @@ public class ArrayListDemo
 		newList2.removeAll (newList);
 		System.out.println (newList2);
 		System.out.println (newList);
-//		System.out.println (subList); <- error
+//		System.out.println (subList); <- error because newList2 got modified
 
 		Collections.sort (myList);
 		System.out.println (myList);

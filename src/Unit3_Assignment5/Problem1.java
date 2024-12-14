@@ -11,6 +11,7 @@ public class Problem1 {
 
 	public static void main(String[] args) throws IOException {
 		
+		// Scanners
 		Scanner in = new Scanner(System.in);
 		BufferedReader inFile = null; String filename; boolean check = true;
 		
@@ -41,7 +42,8 @@ public class Problem1 {
 			System.out.println("String: " + str);
 			
 			allSubstrings.add(""); // add empty substring
-			if (str.length() != 0) { // if string is not empty string, loop through all substrings
+			// if string is not empty string, loop through all substrings (otherwise we do nothing since we already added the empty substring)
+			if (str.length() != 0) { 
 				for (int first = 0; first < str.length(); ++first) {
 					for (int last = first+1; last <= str.length(); ++last) {
 						allSubstrings.add(str.substring(first, last));
