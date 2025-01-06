@@ -67,16 +67,10 @@ System.out.println ("\nChecking for elements or set within sets");
 	System.out.println (intersection.containsAll  
                            (secondSet));
 
-
-
-
 	System.out.println ("\nUsing an Iterator to look at the set");
 	Iterator <String> iter = mySet.iterator ();
 	while (iter.hasNext ())
 	    System.out.println (iter.next ());
-
-
-
 
 	System.out.println ("\nTree Set commands");
 	TreeSet <String> myTreeSet = new TreeSet 

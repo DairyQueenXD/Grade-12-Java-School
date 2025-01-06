@@ -1,1 +1,13 @@
-a
+don’t, isn’t, ... → one word (or convert to two words – ie. “do not”, “did not”, ...)
+
+he’s, I’m, you’re, ... → one word (or convert to two words – ie. “he is”, “I am”, ...)
+
+Shawn’s, apple’s, ... → remove ’s from words
+
+Jonas’, ’twas , ... → remove beginning or ending apostrophes
+
+ice-cream → one word (if chopped by line, change to two words)
+
+123, ... → either include ALL numbers or ignore ALL numbers
+
+-, *, ... → ignore standalone symbols (or if a word begins/ends with it)

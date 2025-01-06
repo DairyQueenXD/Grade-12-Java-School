@@ -24,26 +24,19 @@ public class MapDemo
 
 		System.out.println ("\nThe complete map and its size");
 		System.out.println (animalClasses);
-
-
-
+		
 		System.out.println (animalClasses.size ());
-
 
 		String v = animalClasses.put ("dog", "canine");
 		System.out.println (v);
 		System.out.println ("Updated map");
 		System.out.println (animalClasses);
 
-
-
-
 		String matchingValue = animalClasses.get ("goldfinch");
 		System.out.println (matchingValue);
 
 		matchingValue = animalClasses.get ("monkey");
 		System.out.println (matchingValue);
-
 
 		Set <String> setOfKeys = animalClasses.keySet (); // VIEW PORTION
 		//	Set<String> setOfKeys2 = new HashSet<String>(animalClasses.keySet()); <- to create a new one unaffected by original

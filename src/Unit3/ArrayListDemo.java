@@ -1,4 +1,4 @@
-package Unit3;
+ package Unit3;
 import java.util.*;
 
 public class ArrayListDemo
@@ -56,7 +56,9 @@ public class ArrayListDemo
 		System.out.println (subList.equals (newList));
 		System.out.println (subList.equals (newList2));
 
+		System.out.println(newList2);
 		newList2.removeAll (newList);
+
 		System.out.println (newList2);
 		System.out.println (newList);
 //		System.out.println (subList); <- error because newList2 got modified
@@ -83,7 +85,7 @@ public class ArrayListDemo
 		for (int i = 0 ; i < myArray.length ; i++)
 			System.out.println (myArray [i]);
 
-
+myList.toArray(new String[myList.size()]);
 
 		String[] strArray = new String [myList.size ()];
 		myList.toArray (strArray);
