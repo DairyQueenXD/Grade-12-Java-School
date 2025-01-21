@@ -35,6 +35,7 @@ public class SetDemo
 	Set <String >intersection = new HashSet  
                                    <String >(mySet);
 	intersection.retainAll (secondSet);
+
 	System.out.println (intersection);
 	System.out.println ("Number of elements: " + 
                             intersection.size ());

@@ -73,6 +73,7 @@ public class RecursionExercises {
 		customers--;
 		return add + bubbles(customers);
 	}
+	
 	public static double sumDiff (int num) {
 		if (num == 0 || num == 1 || num == -1) return num;
 		if (num > 0) {

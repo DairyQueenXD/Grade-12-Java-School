@@ -11,7 +11,6 @@ import java.awt.event.*;
  * A program that simulates managing an arcade shop by keeping track of an inventory of arcade machines
  * and games available for play. Allows the user to manage bookings, layout, and offers loyalty discounts.
  */
-
 public class Main {
 
     private JFrame frame;
@@ -43,6 +42,8 @@ public class Main {
 
         JButton managerButton = new JButton("Manage Arcade");
         JButton customerButton = new JButton("Customer Bookings");
+        JButton instructionsButton = new JButton("Instructions");
+        JButton aboutButton = new JButton("About");
         JButton exitButton = new JButton("Exit");
 
         // Add button actions
@@ -60,6 +61,9 @@ public class Main {
             frame.repaint();
         });
 
+        instructionsButton.addActionListener(evt -> showInstructions());
+        aboutButton.addActionListener(evt -> showAbout());
+
         exitButton.addActionListener(evt -> System.exit(0));
 
         // Add buttons to panel
@@ -68,10 +72,22 @@ public class Main {
         buttonPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         buttonPanel.add(customerButton);
         buttonPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        buttonPanel.add(instructionsButton);
+        buttonPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        buttonPanel.add(aboutButton);
+        buttonPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         buttonPanel.add(exitButton);
 
         mainPanel.add(buttonPanel, BorderLayout.CENTER);
 
         return mainPanel;
+    }
+
+    private void showInstructions() {
+        JOptionPane.showMessageDialog(frame, "Instructions:\n1. Manage your arcade machines and customers.\n2. Place machines on the grid.\n3. Track playtimes and loyalty discounts.", "Instructions", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private void showAbout() {
+        JOptionPane.showMessageDialog(frame, "About:\nArcade Shop Management System v1.0\nCreated by Dequan Kong.", "About", JOptionPane.INFORMATION_MESSAGE);
     }
 }
